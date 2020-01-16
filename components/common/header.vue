@@ -33,6 +33,7 @@ export default {
 
 <style lang="less" scoped>
 .header-wrapper {
+  min-width: 1000px;
   height: 60px;
   position: relative;
   border-bottom: 1px solid #ccc;
