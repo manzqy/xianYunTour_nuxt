@@ -17,9 +17,19 @@
         </nuxt-link>
       </el-row>
       <div class="login">
-        <nuxt-link to="/user/login">
+        <nuxt-link v-if="!$store.state.user.userInfo.nickname" to="/user/login">
           登录/注册
         </nuxt-link>
+        <el-dropdown v-else>
+          <span class="el-dropdown-link">
+            <img :src="$axios.defaults.baseURL + $store.state.user.userInfo.defaultAvatar" alt="">
+            {{ $store.state.user.userInfo.nickname }}<i class="el-icon-arrow-down el-icon--right" />
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item>个人中心</el-dropdown-item>
+            <el-dropdown-item>退出</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </div>
     </el-row>
   </div>
@@ -27,11 +37,23 @@
 
 <script>
 export default {
-
+  mounted () {
+    // eslint-disable-next-line no-console
+    console.log(this.$store.state.user.userInfo.nickname)
+  }
 }
 </script>
 
 <style lang="less" scoped>
+.el-dropdown-link {
+  cursor: pointer;
+  img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    vertical-align: middle;
+  }
+}
 .header-wrapper {
   min-width: 1000px;
   height: 60px;
